@@ -1,0 +1,144 @@
+{
+  "name": "WorkbenchHeader",
+  "type": "module",
+  "imports": [
+    {
+      "src": "./index.module.scss",
+      "modules": [
+        {
+          "name": "default",
+          "alias": "styles"
+        }
+      ]
+    }
+  ],
+  "props":{
+    "projectName":{
+      "type":"string"
+    }
+  },
+  "fields": {
+    "actions": {
+      "type": "array",
+      "value": [
+        {
+          "label": "[[file]]",
+          "options": [
+            {
+              "content": "创建项目",
+              "action": "createFile"
+            },
+            {
+              "content": "打开项目",
+              "action": "openFile"
+            }
+          ]
+        },
+        {
+          "label": "[[edit]]",
+          "options": [
+            {
+              "content": "创建项目",
+              "action": "createFile"
+            },
+            {
+              "content": "打开项目",
+              "action": "openFile"
+            }
+          ]
+        },
+        {
+          "label": "[[window]]",
+          "options": [
+            {
+              "content": "创建项目",
+              "action": "createFile"
+            },
+            {
+              "content": "打开项目",
+              "action": "openFile"
+            }
+          ]
+        },
+        {
+          "label": "[[language]]",
+          "options": [
+            {
+              "content": "创建项目",
+              "action": "createFile"
+            },
+            {
+              "content": "打开项目",
+              "action": "openFile"
+            }
+          ]
+        },
+        {
+          "label": "[[versionControl]]",
+          "options": [
+            {
+              "content": "创建项目",
+              "action": "createFile"
+            },
+            {
+              "content": "打开项目",
+              "action": "openFile"
+            }
+          ]
+        },
+        {
+          "label": "[[api]]",
+          "options": [
+            {
+              "content": "创建项目",
+              "action": "createFile"
+            },
+            {
+              "content": "打开项目",
+              "action": "openFile"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "view": {
+    "name": "div",
+    "props": {
+      "className": "${styles.workbenchHeader}"
+    },
+    "children": [
+      {
+        "name": "TDropdown",
+        "props": {
+          "options": "{{item.options}}",
+          "key": "{{item.label}}"
+        },
+        "for": {
+          "array": "actions"
+        },
+        "children": [
+          {
+            "name": "span",
+            "text": "{{item.label}}",
+            "props": {
+              "variant": "text",
+              "className":"${styles.action}"
+            }
+          }
+        ]
+      },
+      {
+        "name":"LineDivider"
+      },
+      {
+        "if":"!!projectName",
+        "name":"span",
+        "text":"${projectName}"
+      },
+      {
+        "name":"LineDivider"
+      }
+    ]
+  }
+}

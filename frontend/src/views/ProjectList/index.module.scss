@@ -1,0 +1,36 @@
+@use '@/theme/color.scss';
+.projectList{
+    padding: 10px;
+    box-sizing: border-box;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+    min-width: 400px;
+    .label{
+        font-weight: bold;
+    }
+    .projectItem{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        width: 100%;
+        cursor: pointer;
+        padding: 5px;
+        border-radius: 4px;
+        box-sizing: border-box;
+        &:hover{
+            background: color.$hoverBackgroundColor;
+        }
+        .name{
+            flex-shrink: 0;
+        }
+        .path{
+            overflow: hidden;
+            text-wrap: nowrap;
+            text-overflow: ellipsis;
+            color: color.$darkTextColor;
+        }
+    }
+}

@@ -1,0 +1,62 @@
+{
+    "name":"Actions",
+    "type":"module",
+    "imports":[
+        {
+            "src":"./index.module.scss",
+            "modules":[
+                {
+                    "name":"default",
+                    "alias":"styles"
+                }
+            ]
+        },
+        {
+            "src":"tdesign-icons-react",
+            "modules":[
+                {
+                    "name":"FileAddIcon"
+                },{
+                    "name":"GitRepositoryIcon"
+                },{
+                    "name":"FolderOpenIcon"
+                }
+            ]
+        }
+    ],
+    "view":{
+        "name":"div",
+        "props":{
+            "className":"{{styles.actions}}"
+        },
+        "children":[
+            {
+                "name":"TButton",
+                "text":"[[create]]",
+                "props":{
+                    "block": true,
+                    "variant":"outline",
+                    "icon":"{{React.createElement(FileAddIcon)}}"
+                }
+            },
+            {
+                "name":"TButton",
+                "text":"[[importLocal]]",
+                "props":{
+                    "block": true,
+                    "variant":"outline",
+                    "icon":"{{React.createElement(FolderOpenIcon)}}"
+                }
+            },
+            {
+                "name":"TButton",
+                "text":"[[importFromGit]]",
+                "props":{
+                    "block": true,
+                    "variant":"outline",
+                    "icon":"{{React.createElement(GitRepositoryIcon)}}"
+                }
+            }
+        ]
+    }
+}

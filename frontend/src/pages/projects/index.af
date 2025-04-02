@@ -1,0 +1,63 @@
+{
+  "type": "module",
+  "name": "projects",
+  "imports": [
+    {
+      "src": "./index.module.scss",
+      "modules": [
+        {
+          "alias": "styles",
+          "name": "default"
+        }
+      ]
+    }
+  ],
+  "fields": {
+    "projects": {
+      "type": "array",
+      "reactive": true,
+      "value": []
+    }
+  },
+  "controllers": [
+    "./controller/ProjectsController.js"
+  ],
+  "view": {
+    "name": "div",
+    "children": [
+      {
+        "name": "div",
+        "props": {
+          "className": "${styles.projects}"
+        },
+        "children": [
+          {
+            "name": "ProjectList",
+            "props": {
+              "className": "${styles.card}",
+              "data": "{{projects}}"
+            },
+            "events": {
+              "onProjectClick": {
+                "type": "nav",
+                "receives": [
+                  "project"
+                ],
+                "value":"/workbench",
+                "query":{
+                  "id":"${project.id}"
+                }
+              }
+            }
+          },
+          {
+            "name": "Actions",
+            "props": {
+              "className": "${styles.card}"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+@use '@/theme/color.scss';
+.projects{
+    display: flex;
+    padding: 10px;
+    box-sizing: border-box;
+    gap: 10px;
+    .card{
+        flex-shrink: 0;
+        background: color.$cardBackgroundColor;
+        flex: 1;
+        border-radius: 5px;
+        flex-direction: column;
+    }
+}

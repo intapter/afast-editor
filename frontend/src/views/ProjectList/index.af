@@ -1,0 +1,88 @@
+{
+  "type": "module",
+  "name": "ProjectList",
+  "imports": [
+    {
+      "src": "./index.module.scss",
+      "modules": [
+        {
+          "name": "default",
+          "alias": "styles"
+        }
+      ]
+    }
+  ],
+  "props": {
+    "data": {
+      "type": "array"
+    }
+  },
+  "events":{
+    "onProjectClick":{
+      "values":[
+        {
+          "name":"project",
+          "type":"object"
+        }
+      ]
+    }
+  },
+  "view": {
+    "name": "div",
+    "props": {
+      "className": "${styles.projectList}"
+    },
+    "children": [
+      {
+        "name": "div",
+        "props":{
+          "className":"${styles.label}"
+        },
+        "text":"[[project+colon]]"
+      },
+      {
+        "name": "div",
+        "props": {
+          "className": "${styles.projectItem}",
+          "key": "${item.id}"
+        },
+        "for": {
+          "array": "data"
+        },
+        "events":{
+          "onClick":{
+            "type":"dispatch",
+            "name":"onProjectClick",
+            "values":["{{item}}"]
+          }
+        },
+        "children": [
+          {
+            "name": "a"
+          },
+          {
+            "name": "a",
+            "props":{
+              "className":"${styles.name}"
+            },
+            "text": "${item.name}"
+          },
+          {
+            "name": "a",
+            "props":{
+              "className":"${styles.path}"
+            },
+            "text": "(${item.path})"
+          },
+          {
+            "name": "a",
+            "props":{
+              "className":"${styles.time}"
+            },
+            "text": "{{item.time}}"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,6 @@
+@use '@/theme/color.scss';
+:root{
+    background: color.$backgroundColor;
+    color: color.$textColor;
+    font-size: 14px;
+}

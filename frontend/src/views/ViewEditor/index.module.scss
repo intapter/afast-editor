@@ -1,0 +1,9 @@
+@use '@/theme/color.scss';
+.viewEditor{
+  width: 100%;
+  .tabs{
+    background: color.$cardBackgroundColor;
+    color: color.$textColor;
+    width: 100%;
+  }
+}

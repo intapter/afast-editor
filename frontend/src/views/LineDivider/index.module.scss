@@ -1,0 +1,7 @@
+@use '@/theme/color.scss';
+.lineDivider{
+  background: color.$borderColor;
+  width: 1px;
+  height: 1rem;
+  margin: 0 10px;
+}

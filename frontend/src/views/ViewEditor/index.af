@@ -1,0 +1,85 @@
+{
+  "name": "ViewEditor",
+  "type": "module",
+  "imports": [
+    {
+      "src": "./index.module.scss",
+      "modules": [
+        {
+          "name": "default",
+          "alias": "styles"
+        }
+      ]
+    }
+  ],
+  "props": {
+    "data": {
+      "type": "object"
+    }
+  },
+  "view": {
+    "name": "div",
+    "props": {
+      "className": "{{styles.viewEditor}}"
+    },
+    "children": [
+      {
+        "if": "!!data",
+        "name": "TTabs",
+        "props": {
+          "defaultValue": "views",
+          "size": "small",
+          "className": "{{styles.tabs}}"
+        },
+        "children": [
+          {
+            "name": "TTabPanel",
+            "props": {
+              "value": "views",
+              "label": "${useLanguage('views')}",
+              "block": true
+            },
+            "children": []
+          },
+          {
+            "name": "TTabPanel",
+            "props": {
+              "value": "fields",
+              "label": "${useLanguage('fields')}(${data.fields ? Object.keys(data.fields).length : 0})",
+              "block": true
+            },
+            "children": []
+          },
+          {
+            "name": "TTabPanel",
+            "props": {
+              "value": "controllers",
+              "label": "${useLanguage('controllers')}(${data.controllers ? Object.keys(data.controllers).length : 0})",
+              "block": true
+            },
+            "children": []
+          },
+          {
+            "name": "TTabPanel",
+            "props": {
+              "value": "events",
+              "label": "${useLanguage('events')}(${data.events ? Object.keys(data.events).length : 0})",
+              "block": true
+            },
+            "children": []
+          },
+          {
+            "name": "TTabPanel",
+            "props": {
+              "value": "imports",
+              "label": "${useLanguage('imports')}(${data.imports ? Object.keys(data.imports).length : 0})",
+              "block": true,
+              "theme": "default"
+            },
+            "children": []
+          }
+        ]
+      }
+    ]
+  }
+}

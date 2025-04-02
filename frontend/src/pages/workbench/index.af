@@ -1,0 +1,101 @@
+{
+  "type": "module",
+  "name": "workbench",
+  "controllers": [
+    "./controller/ProjectController.js",
+    "./controller/PageController.js"
+  ],
+  "imports": [
+    {
+      "src": "./index.module.scss",
+      "modules": [
+        {
+          "alias": "styles",
+          "name": "default"
+        }
+      ]
+    }
+  ],
+  "fields": {
+    "activePageName": {
+      "type": "string",
+      "reactive": true
+    },
+    "projectName": {
+      "type": "string",
+      "reactive": true
+    },
+    "pageInfo": {
+      "type": "object",
+      "reactive": true
+    },
+    "pageList": {
+      "type": "array",
+      "value": [
+        {
+          "name": "a",
+          "remark": "100000"
+        }
+      ],
+      "reactive": true
+    },
+    "searchParams": {
+      "type": "searchParams"
+    }
+  },
+  "view": {
+    "name": "div",
+    "props": {
+      "className": "{{styles.workbench}}"
+    },
+    "children": [
+      {
+        "name": "WorkbenchHeader",
+        "props": {
+          "projectName": "{{projectName}}"
+        }
+      },
+      {
+        "name": "div",
+        "props": {
+          "className": "{{styles.body}}"
+        },
+        "children": [
+          {
+            "name": "PageList",
+            "props": {
+              "activePageName": "{{activePageName}}",
+              "className": "{{styles.pageList}}",
+              "pages": "{{pageList}}"
+            },
+            "events": {
+              "onPageSelect": {
+                "receives": [
+                  "item"
+                ],
+                "actions": [
+                  {
+                    "type": "setField",
+                    "name": "activePageName",
+                    "value": "${item.name}"
+                  },
+                  {
+                    "type": "hook",
+                    "name": "onPageSelect",
+                    "values": ["{{item}}"]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name":"ViewEditor",
+            "props":{
+              "data":"{{pageInfo}}"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

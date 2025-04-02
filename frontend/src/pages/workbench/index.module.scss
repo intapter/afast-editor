@@ -1,0 +1,19 @@
+@use '@/theme/color.scss';
+.workbench{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  .body{
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    .pageList{
+      border-right: 1px solid color.$borderColor;
+      padding: 5px;
+      height: 100%;
+      box-sizing: border-box;
+      width: 200px;
+    }
+  }
+}

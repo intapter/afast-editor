@@ -1,0 +1,16 @@
+{
+    "colon":":",
+    "project":"History projects",
+    "selectAProject":"Select a project and start",
+    "create":"Create new project",
+    "importLocal":"Import local project",
+    "importFromGit":"Import from git repository",
+    "file":"File",
+    "edit":"Edit",
+    "window":"Window",
+    "language":"Language",
+    "versionControl":"Version control",
+    "api":"Apis",
+    "pages":"Pages",
+    "fields":"Fields"
+}

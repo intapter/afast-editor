@@ -1,0 +1,21 @@
+{
+    "colon":"：",
+    "project":"历史项目",
+    "selectAProject":"请选择一个项目",
+    "create":"创建新的项目",
+    "importLocal":"导入本地项目",
+    "importFromGit":"从git仓库导入",
+    "file":"文件",
+    "edit":"编辑",
+    "window":"窗口",
+    "language":"语言",
+    "versionControl":"版本控制",
+    "api":"接口",
+    "pages":"页面",
+    "fields":"字段",
+    "events":"事件",
+    "imports":"导入",
+    "controllers":"控制器",
+    "views":"视图",
+    "styles":"样式"
+}

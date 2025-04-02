@@ -1,0 +1,97 @@
+{
+  "name": "PageList",
+  "type": "module",
+  "imports": [
+    {
+      "src": "./index.module.scss",
+      "modules": [
+        {
+          "name": "default",
+          "alias": "styles"
+        }
+      ]
+    }
+  ],
+  "props":{
+    "pages":{
+      "type":"array"
+    },
+    "activePageName":{
+      "type":"string"
+    }
+  },
+  "events":{
+    "onPageSelect":{
+      "value":[
+        {
+          "name":"page",
+          "type":"object"
+        }
+      ]
+    }
+  },
+  "view": {
+    "name": "div",
+    "children": [
+      {
+        "name": "div",
+        "props": {
+          "className": "${styles.pageList}"
+        },
+        "children": [
+          {
+            "name":"div",
+            "text":"[[pages]]",
+            "props":{
+              "className":"${styles.label}"
+            }
+          },
+          {
+            "if":"pages",
+            "name": "div",
+            "props": {
+              "className": "${styles.scroll}"
+            },
+            "children": [
+              {
+                "for":{
+                  "array":"pages"
+                },
+                "name": "div",
+                "props": {
+                  "key":"{{item.name}}",
+                  "className": "${styles.pageItem} ${activePageName === item.name ? styles.isActive : ''}"
+                },
+                "events":{
+                  "onClick":{
+                    "type":"dispatch",
+                    "name":"onPageSelect",
+                    "values":[
+                      "{{item}}"
+                    ]
+                  }
+                },
+                "children": [
+                  {
+                    "name": "span",
+                    "props": {
+                      "className": "${styles.name}"
+                    },
+                    "text":"{{item.name}}"
+                  },
+                  {
+                    "name": "span",
+                    "props": {
+                      "className": "${styles.remark}"
+                    },
+                    "text":"{{item.remark}}"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
