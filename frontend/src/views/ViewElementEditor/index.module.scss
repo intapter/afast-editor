@@ -1,0 +1,40 @@
+@use '@/theme/color.scss';
+
+.viewElementEditor{
+  display: flex;
+  height: 100%;
+  user-select: none;
+  position: relative;
+  .views{
+    flex-shrink: 0;
+    height: 100%;
+    border-right: 1px solid color.$borderColor;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: auto;
+  }
+  .resize{
+    width: 5px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    cursor: ew-resize;
+  }
+  .configBar{
+    flex: 1;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    .config{
+      height: fit-content;
+      display: flex;
+      gap: 10px;
+      .label{
+        text-align: left;
+        width: 80px;
+      }
+    }
+  }
+}

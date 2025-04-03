@@ -17,5 +17,12 @@
     "imports":"导入",
     "controllers":"控制器",
     "views":"视图",
-    "styles":"样式"
+    "styles":"样式",
+    "id":"元素ID",
+    "name":"名称",
+    "showCondition":"显示条件",
+    "styleClassName":"样式类名",
+    "style":"行内样式",
+    "key":"键",
+    "mapArray":"数组映射"
 }

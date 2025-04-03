@@ -31,6 +31,8 @@
       "parent": "TTabs",
       "name": "TabPanel"
     },
+    "Tree":"@/views/Tree/index.jsx",
+    "ViewElementEditor": "@/views/ViewElementEditor/index.af",
     "ViewEditor": "@/views/ViewEditor/index.af",
     "LineDivider": "@/views/LineDivider/index.jsx",
     "PageList": "@/views/PageList/index.af",

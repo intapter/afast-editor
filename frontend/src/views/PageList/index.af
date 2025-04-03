@@ -12,20 +12,20 @@
       ]
     }
   ],
-  "props":{
-    "pages":{
-      "type":"array"
+  "props": {
+    "pages": {
+      "type": "array"
     },
-    "activePageName":{
-      "type":"string"
+    "activePageName": {
+      "type": "string"
     }
   },
-  "events":{
-    "onPageSelect":{
-      "value":[
+  "events": {
+    "onPageSelect": {
+      "value": [
         {
-          "name":"page",
-          "type":"object"
+          "name": "page",
+          "type": "object"
         }
       ]
     }
@@ -35,38 +35,30 @@
     "children": [
       {
         "name": "div",
-        "props": {
-          "className": "${styles.pageList}"
-        },
+        "class": "${styles.pageList}",
         "children": [
           {
-            "name":"div",
-            "text":"[[pages]]",
-            "props":{
-              "className":"${styles.label}"
-            }
+            "name": "div",
+            "text": "[[pages]]",
+            "class": "${styles.label}"
           },
           {
-            "if":"pages",
+            "if": "pages",
             "name": "div",
-            "props": {
-              "className": "${styles.scroll}"
-            },
+            "class": "${styles.scroll}",
             "children": [
               {
-                "for":{
-                  "array":"pages"
+                "for": {
+                  "array": "pages"
                 },
                 "name": "div",
-                "props": {
-                  "key":"{{item.name}}",
-                  "className": "${styles.pageItem} ${activePageName === item.name ? styles.isActive : ''}"
-                },
-                "events":{
-                  "onClick":{
-                    "type":"dispatch",
-                    "name":"onPageSelect",
-                    "values":[
+                "key": "{{item.name}}",
+                "class": "${styles.pageItem} ${activePageName === item.name ? styles.isActive : ''}",
+                "events": {
+                  "onClick": {
+                    "type": "dispatch",
+                    "name": "onPageSelect",
+                    "values": [
                       "{{item}}"
                     ]
                   }
@@ -74,17 +66,13 @@
                 "children": [
                   {
                     "name": "span",
-                    "props": {
-                      "className": "${styles.name}"
-                    },
-                    "text":"{{item.name}}"
+                    "class": "${styles.name}",
+                    "text": "{{item.name}}"
                   },
                   {
                     "name": "span",
-                    "props": {
-                      "className": "${styles.remark}"
-                    },
-                    "text":"{{item.remark}}"
+                    "class": "${styles.remark}",
+                    "text": "{{item.remark}}"
                   }
                 ]
               }

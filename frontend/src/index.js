@@ -1,1 +1,1 @@
-// document.documentElement.setAttribute("theme-mode", "dark");
+document.documentElement.setAttribute("theme-mode", "dark");

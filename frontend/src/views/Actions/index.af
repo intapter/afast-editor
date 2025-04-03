@@ -26,9 +26,7 @@
     ],
     "view":{
         "name":"div",
-        "props":{
-            "className":"{{styles.actions}}"
-        },
+        "class":"{{styles.actions}}",
         "children":[
             {
                 "name":"TButton",

@@ -44,28 +44,28 @@
     }
   },
   "view": {
+    "id": "1",
     "name": "div",
-    "props": {
-      "className": "{{styles.workbench}}"
-    },
+    "class": "{{styles.workbench}}",
     "children": [
       {
+        "id": "2",
         "name": "WorkbenchHeader",
         "props": {
           "projectName": "{{projectName}}"
         }
       },
       {
+        "id": "3",
         "name": "div",
-        "props": {
-          "className": "{{styles.body}}"
-        },
+        "class": "{{styles.body}}",
         "children": [
           {
+            "id": "4",
             "name": "PageList",
+            "class": "{{styles.pageList}}",
             "props": {
               "activePageName": "{{activePageName}}",
-              "className": "{{styles.pageList}}",
               "pages": "{{pageList}}"
             },
             "events": {
@@ -82,16 +82,19 @@
                   {
                     "type": "hook",
                     "name": "onPageSelect",
-                    "values": ["{{item}}"]
+                    "values": [
+                      "{{item}}"
+                    ]
                   }
                 ]
               }
             }
           },
           {
-            "name":"ViewEditor",
-            "props":{
-              "data":"{{pageInfo}}"
+            "id": "5",
+            "name": "ViewEditor",
+            "props": {
+              "data": "{{pageInfo}}"
             }
           }
         ]

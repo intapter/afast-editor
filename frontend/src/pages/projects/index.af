@@ -23,18 +23,19 @@
     "./controller/ProjectsController.js"
   ],
   "view": {
+    "id": "1",
     "name": "div",
     "children": [
       {
+        "id": "2",
         "name": "div",
-        "props": {
-          "className": "${styles.projects}"
-        },
+        "class": "${styles.projects}",
         "children": [
           {
+            "id": "3",
             "name": "ProjectList",
+            "class": "${styles.card}",
             "props": {
-              "className": "${styles.card}",
               "data": "{{projects}}"
             },
             "events": {
@@ -43,18 +44,17 @@
                 "receives": [
                   "project"
                 ],
-                "value":"/workbench",
-                "query":{
-                  "id":"${project.id}"
+                "value": "/workbench",
+                "query": {
+                  "id": "${project.id}"
                 }
               }
             }
           },
           {
+            "id": "4",
             "name": "Actions",
-            "props": {
-              "className": "${styles.card}"
-            }
+            "class": "${styles.card}"
           }
         ]
       }

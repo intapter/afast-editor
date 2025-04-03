@@ -12,9 +12,9 @@
       ]
     }
   ],
-  "props":{
-    "projectName":{
-      "type":"string"
+  "props": {
+    "projectName": {
+      "type": "string"
     }
   },
   "fields": {
@@ -104,16 +104,14 @@
   },
   "view": {
     "name": "div",
-    "props": {
-      "className": "${styles.workbenchHeader}"
-    },
+    "class": "${styles.workbenchHeader}",
     "children": [
       {
         "name": "TDropdown",
         "props": {
-          "options": "{{item.options}}",
-          "key": "{{item.label}}"
+          "options": "{{item.options}}"
         },
+        "key": "{{item.label}}",
         "for": {
           "array": "actions"
         },
@@ -122,22 +120,22 @@
             "name": "span",
             "text": "{{item.label}}",
             "props": {
-              "variant": "text",
-              "className":"${styles.action}"
-            }
+              "variant": "text"
+            },
+              "class": "${styles.action}"
           }
         ]
       },
       {
-        "name":"LineDivider"
+        "name": "LineDivider"
       },
       {
-        "if":"!!projectName",
-        "name":"span",
-        "text":"${projectName}"
+        "if": "!!projectName",
+        "name": "span",
+        "text": "${projectName}"
       },
       {
-        "name":"LineDivider"
+        "name": "LineDivider"
       }
     ]
   }

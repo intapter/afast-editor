@@ -1,0 +1,203 @@
+{
+  "name": "ViewElementEditor",
+  "type": "module",
+  "controllers": [
+    "./controller/ResizeController.js"
+  ],
+  "events": {
+    "onElementSelect": {
+      "value": [
+        {
+          "name": "id",
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "fields": {
+    "width": {
+      "type": "number",
+      "value": 300,
+      "reactive": true
+    },
+    "element": {
+      "type": "object",
+      "reactive": true
+    }
+  },
+  "imports": [
+    {
+      "src": "./index.module.scss",
+      "modules": [
+        {
+          "name": "default",
+          "alias": "styles"
+        }
+      ]
+    }
+  ],
+  "props": {
+    "views": {
+      "type": "array"
+    },
+    "currentElement": {
+      "type": "string"
+    }
+  },
+  "view": {
+    "name": "div",
+    "class": "{{styles.viewElementEditor}}",
+    "children": [
+      {
+        "name": "div",
+        "style": {
+          "width": "{{width}}"
+        },
+        "class": "{{styles.views}}",
+        "children": [
+          {
+            "name": "Tree",
+            "props": {
+              "labelName": "name",
+              "data": "{{views}}",
+              "currentActive": "{{currentElement}}"
+            },
+            "events": {
+              "onSelect": {
+                "receives": [
+                  "item"
+                ],
+                "actions": [
+                  {
+                    "type": "dispatch",
+                    "name": "onElementSelect",
+                    "values": [
+                      "{{item.id}}"
+                    ]
+                  },
+                  {
+                    "type": "setField",
+                    "name": "element",
+                    "value": "{{item}}"
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "div",
+        "style": {
+          "left": "{{width}}"
+        },
+        "class": "{{styles.resize}}",
+        "events": {
+          "onMouseDown": {
+            "type": "hook",
+            "name": "startResize"
+          }
+        }
+      },
+      {
+        "name": "div",
+        "children": [
+          {
+            "if": "!!element",
+            "name": "div",
+            "class": "{{styles.configBar}}",
+            "children": [
+              {
+                "for": {
+                  "array": [
+                    {
+                      "name": "id",
+                      "label": "[[id]]"
+                    },
+                    {
+                      "name": "key",
+                      "label": "[[key]]"
+                    },
+                    {
+                      "name": "name",
+                      "label": "[[name]]"
+                    },
+                    {
+                      "name": "if",
+                      "label": "[[showCondition]]"
+                    },
+                    {
+                      "name": "class",
+                      "label": "[[styleClassName]]"
+                    },
+                    {
+                      "name": "style",
+                      "label": "[[style]]"
+                    },
+                    {
+                      "name": "events",
+                      "label": "[[events]]"
+                    },
+                    {
+                      "name": "for",
+                      "label": "[[mapArray]]"
+                    },
+                    {
+                      "name": "text",
+                      "label": "[[text]]"
+                    }
+                  ]
+                },
+                "key": "{{item.name}}",
+                "class": "{{styles.config}}",
+                "name": "div",
+                "children": [
+                  {
+                    "name": "div",
+                    "class": "{{styles.label}}",
+                    "text": "{{useLanguage(item.label,'colon')}}"
+                  },
+                  {
+                    "if": "!['events','for'].includes(item.name)",
+                    "name": "div",
+                    "text": "{{element[item.name] || '--'}}"
+                  },
+                  {
+                    "if": "item.name === 'events'",
+                    "name": "div",
+                    "text": "{{element[item.name] && Object.keys(element[item.name]).length}}"
+                  },
+                  {
+                    "if": "item.name === 'for'",
+                    "name": "div",
+                    "children": [
+                      {
+                        "name": "div",
+                        "if": "element[item.name] && element[item.name].array && typeof element[item.name].array === 'string'",
+                        "text": "{{element[item.name].array}}"
+                      },
+                      {
+                        "name": "div",
+                        "if": "element[item.name] && element[item.name].array && Array.isArray(typeof element[item.name])",
+                        "children": [
+                          {
+                            "name":"div",
+                            "key":"{{item}}",
+                            "for":{
+                              "array":"Object.keys(element[item.name].array)"
+                            },
+                            "text":"{{item}}"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

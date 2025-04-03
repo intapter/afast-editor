@@ -17,43 +17,39 @@
       "type": "array"
     }
   },
-  "events":{
-    "onProjectClick":{
-      "values":[
+  "events": {
+    "onProjectClick": {
+      "values": [
         {
-          "name":"project",
-          "type":"object"
+          "name": "project",
+          "type": "object"
         }
       ]
     }
   },
   "view": {
     "name": "div",
-    "props": {
-      "className": "${styles.projectList}"
-    },
+    "class": "${styles.projectList}",
     "children": [
       {
         "name": "div",
-        "props":{
-          "className":"${styles.label}"
-        },
-        "text":"[[project+colon]]"
+        "class": "${styles.label}",
+        "text": "[[project+colon]]"
       },
       {
         "name": "div",
-        "props": {
-          "className": "${styles.projectItem}",
-          "key": "${item.id}"
-        },
+        "key": "${item.id}",
+        "class": "${styles.projectItem}",
         "for": {
           "array": "data"
         },
-        "events":{
-          "onClick":{
-            "type":"dispatch",
-            "name":"onProjectClick",
-            "values":["{{item}}"]
+        "events": {
+          "onClick": {
+            "type": "dispatch",
+            "name": "onProjectClick",
+            "values": [
+              "{{item}}"
+            ]
           }
         },
         "children": [
@@ -62,23 +58,17 @@
           },
           {
             "name": "a",
-            "props":{
-              "className":"${styles.name}"
-            },
+            "class": "${styles.name}",
             "text": "${item.name}"
           },
           {
             "name": "a",
-            "props":{
-              "className":"${styles.path}"
-            },
+            "class": "${styles.path}",
             "text": "(${item.path})"
           },
           {
             "name": "a",
-            "props":{
-              "className":"${styles.time}"
-            },
+            "class": "${styles.time}",
             "text": "{{item.time}}"
           }
         ]

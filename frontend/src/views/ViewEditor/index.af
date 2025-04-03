@@ -17,32 +17,56 @@
       "type": "object"
     }
   },
+  "fields": {
+    "currentElement": {
+      "type": "string",
+      "reactive": true
+    }
+  },
   "view": {
     "name": "div",
-    "props": {
-      "className": "{{styles.viewEditor}}"
-    },
+    "class": "{{styles.viewEditor}}",
     "children": [
       {
         "if": "!!data",
         "name": "TTabs",
         "props": {
           "defaultValue": "views",
-          "size": "small",
-          "className": "{{styles.tabs}}"
+          "size": "small"
         },
+        "class": "{{styles.tabs}}",
         "children": [
           {
             "name": "TTabPanel",
+            "class": "{{styles.tabPanel}}",
             "props": {
               "value": "views",
               "label": "${useLanguage('views')}",
               "block": true
             },
-            "children": []
+            "children": [
+              {
+                "name": "ViewElementEditor",
+                "props": {
+                  "currentElement": "{{currentElement}}",
+                  "views": "{{data.view}}"
+                },
+                "events": {
+                  "onElementSelect": {
+                    "type": "setField",
+                    "name": "currentElement",
+                    "receives": [
+                      "id"
+                    ],
+                    "value": "{{id}}"
+                  }
+                }
+              }
+            ]
           },
           {
             "name": "TTabPanel",
+            "class": "{{styles.tabPanel}}",
             "props": {
               "value": "fields",
               "label": "${useLanguage('fields')}(${data.fields ? Object.keys(data.fields).length : 0})",
