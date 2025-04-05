@@ -81,9 +81,9 @@
                   },
                   {
                     "type": "hook",
-                    "name": "onPageSelect",
+                    "name": "loadPage",
                     "values": [
-                      "{{item}}"
+                      "{{item.name}}"
                     ]
                   }
                 ]
@@ -94,7 +94,16 @@
             "id": "5",
             "name": "ViewEditor",
             "props": {
+              "projectId":"{{searchParams.get('id')}}",
+              "pageName":"{{activePageName}}",
               "data": "{{pageInfo}}"
+            },
+            "events":{
+              "onUpdate":{
+                "type":"hook",
+                "name":"loadPage",
+                "values":["{{activePageName}}"]
+              }
             }
           }
         ]

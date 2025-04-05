@@ -1,7 +1,8 @@
 import styles from './index.module.scss';
 import React from 'react';
-import { ChevronDownIcon } from 'tdesign-icons-react';
+import { ChevronDownIcon, MoreIcon } from 'tdesign-icons-react';
 import classnames from 'classnames';
+import { Dropdown } from 'tdesign-react';
 const Tree = ({
   style,
   className,
@@ -10,6 +11,8 @@ const Tree = ({
   depth = 0,
   onSelect,
   currentActive,
+  onMenuClick,
+  menu,
 }) => {
   const [showChildren, setShowChildren] = React.useState(depth < 2);
   if (!data) return null;
@@ -23,19 +26,19 @@ const Tree = ({
       )}
     >
       <div
-        onClick={(e) => {
-          e.stopPropagation();
+        onClick={() => {
           onSelect(data);
         }}
         className={classnames(
           styles.content,
           currentActive === data.id && styles.isActive,
         )}
-        style={{ paddingLeft: 5 + depth * 5 }}
+        style={{ paddingLeft: 5 + depth * 10 }}
       >
         {data.children && data.children.length > 0 ? (
           <div
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
               setShowChildren(!showChildren);
             }}
             className={styles.icon}
@@ -46,6 +49,20 @@ const Tree = ({
           <div className={styles.placeholder}></div>
         )}
         <span>{data[labelName]}</span>
+        {menu ? (
+          <Dropdown
+            trigger="click"
+            options={menu}
+            onClick={(item, { e }) => {
+              if (onMenuClick) onMenuClick(item, data);
+              e.stopPropagation();
+            }}
+          >
+            <MoreIcon
+              className={classnames(styles.icon, styles.more)}
+            ></MoreIcon>
+          </Dropdown>
+        ) : null}
       </div>
       <div className={styles.children}>
         {data.children
@@ -58,6 +75,8 @@ const Tree = ({
                   labelName={labelName}
                   depth={depth + 1}
                   onSelect={onSelect}
+                  menu={menu}
+                  onMenuClick={onMenuClick}
                   currentActive={currentActive}
                 />
               );

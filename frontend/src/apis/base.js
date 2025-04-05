@@ -4,7 +4,7 @@ const BASE_URL = "/api"
 
 
 export const httpPost = async (path, data = {}) => {
-  const response = await axios.post(BASE_URL+path,data = {})
+  const response = await axios.post(BASE_URL+path,data)
   return response.data
 }
 

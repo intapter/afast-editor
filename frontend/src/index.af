@@ -23,6 +23,18 @@
     }
   ],
   "views": {
+    "FileAddIcon": {
+      "src": "tdesign-icons-react",
+      "name": "FileAddIcon"
+    },
+    "FolderOpenIcon": {
+      "src": "tdesign-icons-react",
+      "name": "FolderOpenIcon"
+    },
+    "GitRepositoryIcon": {
+      "src": "tdesign-icons-react",
+      "name": "GitRepositoryIcon"
+    },
     "TTabs": {
       "name": "Tabs",
       "src": "tdesign-react"
@@ -31,7 +43,19 @@
       "parent": "TTabs",
       "name": "TabPanel"
     },
-    "Tree":"@/views/Tree/index.jsx",
+    "TDialog": {
+      "src":"tdesign-react",
+      "name":"Dialog"
+    },
+    "TInput":{
+      "src":"tdesign-react",
+      "name":"Input"
+    },
+    "TSelect":{
+      "src":"tdesign-react",
+      "name":"Select"
+    },
+    "Tree": "@/views/Tree/index.jsx",
     "ViewElementEditor": "@/views/ViewElementEditor/index.af",
     "ViewEditor": "@/views/ViewEditor/index.af",
     "LineDivider": "@/views/LineDivider/index.jsx",

@@ -11,7 +11,7 @@ module.exports = {
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "src"),
-      'afast-boot': 'D:/linqin.zhong/Desktop/workspace/afast-project/packages/afast-boot'
+      'afast-boot': path.resolve(__dirname,'../../afast/packages/afast-boot')
     },
   },
   devtool: "source-map",
@@ -97,7 +97,7 @@ module.exports = {
       },
       {
         test: /\.af$/,
-        use: "D:/linqin.zhong/Desktop/workspace/afast-project/packages/afast-loader-react",
+        use: path.resolve(__dirname,'../../afast/packages/afast-loader-react')
       },
     ],
   },

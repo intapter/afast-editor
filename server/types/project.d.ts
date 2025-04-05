@@ -10,10 +10,16 @@ declare interface ProjectInfo {
   routes: {
     [key: string]: {
       src: string;
-      name: string
-    }
-  }
+      name: string;
+    };
+  };
+  views: {
+    [key: string]: {
+      src: string;
+      name: string;
+    };
+  };
   alias: {
-    [key: string]: string
-  }
+    [key: string]: string;
+  };
 }

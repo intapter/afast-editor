@@ -8,6 +8,7 @@
     box-sizing: border-box;
     border-radius: 5px;
     cursor: pointer;
+    overflow: hidden;
     &:hover {
       background-color: color.$hoverBackgroundColor;
     }
@@ -29,16 +30,30 @@
       align-items: center;
       justify-content: center;
       box-sizing: border-box;
+      position: relative;
+      top: 1px;
       &:hover {
         background-color: color.$hoverBackgroundColor;
       }
-      
+      &.more{
+        display: none;
+        transform: rotate(90deg);
+        justify-self: flex-end;
+        margin: auto;
+      }
       svg {
         transform: rotate(-90deg);
         transition: 0.1s;
       }
     }
+    
+    &:hover{
+      .icon.more{
+        display: block;
+      }
+    }
     span {
+      flex: 1;
       text-wrap: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;

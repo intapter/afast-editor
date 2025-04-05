@@ -13,6 +13,12 @@
     }
   ],
   "props": {
+    "pageName": {
+      "type": "string"
+    },
+    "projectId": {
+      "type": "string"
+    },
     "data": {
       "type": "object"
     }
@@ -21,7 +27,13 @@
     "currentElement": {
       "type": "string",
       "reactive": true
+    },
+    "searchParams": {
+      "type": "searchParam"
     }
+  },
+  "events": {
+    "onUpdate": {}
   },
   "view": {
     "name": "div",
@@ -48,10 +60,16 @@
               {
                 "name": "ViewElementEditor",
                 "props": {
+                  "projectId": "{{projectId}}",
+                  "pageName": "{{pageName}}",
                   "currentElement": "{{currentElement}}",
                   "views": "{{data.view}}"
                 },
                 "events": {
+                  "onUpdate": {
+                    "type": "dispatch",
+                    "name": "onUpdate"
+                  },
                   "onElementSelect": {
                     "type": "setField",
                     "name": "currentElement",

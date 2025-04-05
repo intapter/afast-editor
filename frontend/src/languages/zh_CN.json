@@ -2,7 +2,7 @@
     "colon":"：",
     "project":"历史项目",
     "selectAProject":"请选择一个项目",
-    "create":"创建新的项目",
+    "createNewProject":"创建新的项目",
     "importLocal":"导入本地项目",
     "importFromGit":"从git仓库导入",
     "file":"文件",
@@ -24,5 +24,8 @@
     "styleClassName":"样式类名",
     "style":"行内样式",
     "key":"键",
-    "mapArray":"数组映射"
+    "mapArray":"数组映射",
+    "createChildElement":"创建子元素",
+    "delete":"删除",
+    "selectAViewOrHtmlElement":"选择一个组件或HTML元素"
 }

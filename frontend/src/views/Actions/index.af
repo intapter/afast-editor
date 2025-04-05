@@ -1,58 +1,58 @@
 {
-    "name":"Actions",
-    "type":"module",
-    "imports":[
+    "name": "Actions",
+    "type": "module",
+    "imports": [
         {
-            "src":"./index.module.scss",
-            "modules":[
+            "src": "./index.module.scss",
+            "modules": [
                 {
-                    "name":"default",
-                    "alias":"styles"
-                }
-            ]
-        },
-        {
-            "src":"tdesign-icons-react",
-            "modules":[
-                {
-                    "name":"FileAddIcon"
-                },{
-                    "name":"GitRepositoryIcon"
-                },{
-                    "name":"FolderOpenIcon"
+                    "name": "default",
+                    "alias": "styles"
                 }
             ]
         }
     ],
-    "view":{
-        "name":"div",
-        "class":"{{styles.actions}}",
-        "children":[
+    "view": {
+        "name": "div",
+        "class": "{{styles.actions}}",
+        "children": [
             {
-                "name":"TButton",
-                "text":"[[create]]",
-                "props":{
+                "name": "TButton",
+                "text": "[[create]]",
+                "nodes":{
+                    "icon":{
+                        "name":"FileAddIcon"
+                    }
+                },
+                "props": {
                     "block": true,
-                    "variant":"outline",
-                    "icon":"{{React.createElement(FileAddIcon)}}"
+                    "variant": "outline"
                 }
             },
             {
-                "name":"TButton",
-                "text":"[[importLocal]]",
-                "props":{
+                "name": "TButton",
+                "text": "[[importLocal]]",
+                "nodes":{
+                    "icon":{
+                        "name":"FolderOpenIcon"
+                    }
+                },
+                "props": {
                     "block": true,
-                    "variant":"outline",
-                    "icon":"{{React.createElement(FolderOpenIcon)}}"
+                    "variant": "outline"
                 }
             },
             {
-                "name":"TButton",
-                "text":"[[importFromGit]]",
-                "props":{
+                "name": "TButton",
+                "text": "[[importFromGit]]",
+                "nodes":{
+                    "icon":{
+                        "name":"GitRepositoryIcon"
+                    }
+                },
+                "props": {
                     "block": true,
-                    "variant":"outline",
-                    "icon":"{{React.createElement(GitRepositoryIcon)}}"
+                    "variant": "outline"
                 }
             }
         ]

@@ -2,9 +2,11 @@
   "name": "ViewElementEditor",
   "type": "module",
   "controllers": [
-    "./controller/ResizeController.js"
+    "./controller/ResizeController.js",
+    "./controller/ElementController.js"
   ],
   "events": {
+    "onUpdate": {},
     "onElementSelect": {
       "value": [
         {
@@ -23,6 +25,19 @@
     "element": {
       "type": "object",
       "reactive": true
+    },
+    "createChildElementTo": {
+      "type": "string",
+      "reactive": true
+    },
+    "elementName": {
+      "type": "string",
+      "reactive": true
+    },
+    "elementList": {
+      "reactive": true,
+      "type": "array",
+      "value":[]
     }
   },
   "imports": [
@@ -37,6 +52,12 @@
     }
   ],
   "props": {
+    "projectId": {
+      "type": "string"
+    },
+    "pageName": {
+      "type": "string"
+    },
     "views": {
       "type": "array"
     },
@@ -60,9 +81,31 @@
             "props": {
               "labelName": "name",
               "data": "{{views}}",
-              "currentActive": "{{currentElement}}"
+              "currentActive": "{{currentElement}}",
+              "menu": [
+                {
+                  "value": "create",
+                  "content": "[[createChildElement]]"
+                },
+                {
+                  "value": "delete",
+                  "content": "[[delete]]"
+                }
+              ]
             },
             "events": {
+              "onMenuClick": {
+                "receives": [
+                  "action",
+                  "element"
+                ],
+                "type": "hook",
+                "name": "onElementMenuClick",
+                "values": [
+                  "{{action}}",
+                  "{{element}}"
+                ]
+              },
               "onSelect": {
                 "receives": [
                   "item"
@@ -160,33 +203,33 @@
                   {
                     "if": "!['events','for'].includes(item.name)",
                     "name": "div",
-                    "text": "{{element[item.name] || '--'}}"
+                    "text": "{{element[item.name]||'--'}}"
                   },
                   {
-                    "if": "item.name === 'events'",
+                    "if": "item.name==='events'",
                     "name": "div",
-                    "text": "{{element[item.name] && Object.keys(element[item.name]).length}}"
+                    "text": "{{element[item.name]&&Object.keys(element[item.name]).length}}"
                   },
                   {
-                    "if": "item.name === 'for'",
+                    "if": "item.name==='for'",
                     "name": "div",
                     "children": [
                       {
                         "name": "div",
-                        "if": "element[item.name] && element[item.name].array && typeof element[item.name].array === 'string'",
+                        "if": "element[item.name]&&element[item.name].array&&typeof element[item.name].array==='string'",
                         "text": "{{element[item.name].array}}"
                       },
                       {
                         "name": "div",
-                        "if": "element[item.name] && element[item.name].array && Array.isArray(typeof element[item.name])",
+                        "if": "element[item.name]&&element[item.name].array&&Array.isArray(element[item.name])",
                         "children": [
                           {
-                            "name":"div",
-                            "key":"{{item}}",
-                            "for":{
-                              "array":"Object.keys(element[item.name].array)"
+                            "name": "div",
+                            "key": "{{item}}",
+                            "for": {
+                              "array": "Object.keys(element[item.name].array)"
                             },
-                            "text":"{{item}}"
+                            "text": "{{item}}"
                           }
                         ]
                       }
@@ -195,6 +238,62 @@
                 ]
               }
             ]
+          }
+        ]
+      },
+      {
+        "name": "TDialog",
+        "props": {
+          "header": "[[createChildElement]]",
+          "visible": "{{createChildElementTo!==undefined}}"
+        },
+        "events": {
+          "onClose": {
+            "type": "setField",
+            "name": "createChildElementTo",
+            "value": "{{undefined}}"
+          },
+          "onConfirm": {
+            "type": "hook",
+            "name": "handleCreateElement",
+            "values": [
+              "{{createChildElementTo}}",
+              "{{elementName}}"
+            ]
+          }
+        },
+        "children": [
+          {
+            "name":"a",
+            "text":"[[selectAViewOrHtmlElement]]"
+          },
+          {
+            "name": "TSelect",
+            "props": {
+              "filterable": true,
+              "value": "{{elementName}}",
+              "options": "{{elementList}}"
+            },
+            "events": {
+              "onSearch": {
+                "type": "hook",
+                "receives": [
+                  "keyword"
+                ],
+                "name": "searchElement",
+                "values": [
+                  "{{keyword}}"
+                ]
+              },
+              "onChange": {
+                "type": "setField",
+                "receives": [
+                  "value"
+                ],
+                "name": "elementName",
+                "value": "{{value}}"
+              }
+            }
           }
         ]
       }
