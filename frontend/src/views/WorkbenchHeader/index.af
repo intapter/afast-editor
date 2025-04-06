@@ -107,6 +107,18 @@
     "class": "${styles.workbenchHeader}",
     "children": [
       {
+        "name": "img",
+        "class": "${styles.logo}",
+        "props": {
+          "draggable": false,
+          "src": "favicon.ico"
+        },
+        "events": {}
+      },
+      {
+        "name": "LineDivider"
+      },
+      {
         "name": "TDropdown",
         "props": {
           "options": "{{item.options}}"
@@ -122,7 +134,7 @@
             "props": {
               "variant": "text"
             },
-              "class": "${styles.action}"
+            "class": "${styles.action}"
           }
         ]
       },

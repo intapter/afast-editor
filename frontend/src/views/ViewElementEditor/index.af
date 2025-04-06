@@ -22,6 +22,10 @@
       "value": 300,
       "reactive": true
     },
+    "newElement": {
+      "type": "object",
+      "reactive": true
+    },
     "element": {
       "type": "object",
       "reactive": true
@@ -37,7 +41,7 @@
     "elementList": {
       "reactive": true,
       "type": "array",
-      "value":[]
+      "value": []
     }
   },
   "imports": [
@@ -122,6 +126,11 @@
                     "type": "setField",
                     "name": "element",
                     "value": "{{item}}"
+                  },
+                  {
+                    "type": "setField",
+                    "name": "newElement",
+                    "value": "{{item}}"
                   }
                 ]
               }
@@ -155,15 +164,18 @@
                   "array": [
                     {
                       "name": "id",
-                      "label": "[[id]]"
+                      "label": "[[id]]",
+                      "type": "static"
                     },
                     {
                       "name": "key",
-                      "label": "[[key]]"
+                      "label": "[[key]]",
+                      "type": "text"
                     },
                     {
                       "name": "name",
-                      "label": "[[name]]"
+                      "label": "[[name]]",
+                      "type": "select"
                     },
                     {
                       "name": "if",
@@ -175,7 +187,8 @@
                     },
                     {
                       "name": "style",
-                      "label": "[[style]]"
+                      "label": "[[style]]",
+                      "type": "text"
                     },
                     {
                       "name": "events",
@@ -187,7 +200,8 @@
                     },
                     {
                       "name": "text",
-                      "label": "[[text]]"
+                      "label": "[[text]]",
+                      "type": "text"
                     }
                   ]
                 },
@@ -201,39 +215,72 @@
                     "text": "{{useLanguage(item.label,'colon')}}"
                   },
                   {
-                    "if": "!['events','for'].includes(item.name)",
-                    "name": "div",
-                    "text": "{{element[item.name]||'--'}}"
+                    "name": "span",
+                    "if": "item.type === 'static'",
+                    "text": "{{element[item.name]}}"
                   },
                   {
-                    "if": "item.name==='events'",
-                    "name": "div",
-                    "text": "{{element[item.name]&&Object.keys(element[item.name]).length}}"
-                  },
-                  {
-                    "if": "item.name==='for'",
-                    "name": "div",
-                    "children": [
-                      {
-                        "name": "div",
-                        "if": "element[item.name]&&element[item.name].array&&typeof element[item.name].array==='string'",
-                        "text": "{{element[item.name].array}}"
-                      },
-                      {
-                        "name": "div",
-                        "if": "element[item.name]&&element[item.name].array&&Array.isArray(element[item.name])",
-                        "children": [
-                          {
-                            "name": "div",
-                            "key": "{{item}}",
-                            "for": {
-                              "array": "Object.keys(element[item.name].array)"
-                            },
-                            "text": "{{item}}"
-                          }
-                        ]
+                    "name": "TInput",
+                    "if": "item.type === 'text'",
+                    "props": {
+                      "size": "small",
+                      "value": "{{newElement[item.name]}}"
+                    },
+                    "events":{
+                      "onChange":{
+                        "type":"setField",
+                        "name":"newElement",
+                        "receives":["value"],
+                        "value":"{{{...newElement,[item.name]:value}}}"
                       }
-                    ]
+                    }
+                  },
+                  {
+                    "name": "TButton",
+                    "if": "item.type === 'text' && newElement[item.name] !== element[item.name]",
+                    "props": {
+                      "size": "small",
+                      "theme": "primary"
+                    },
+                    "text": "[[save]]",
+                    "events":{
+                      "onClick":{
+                        "type":"hook",
+                        "name":"updateElement",
+                        "receives":["value"],
+                        "values":["{{item.name}}"]
+                      }
+                    }
+                  },
+                  {
+                    "name": "TSelect",
+                    "if": "item.type === 'select'",
+                    "props": {
+                      "size": "small",
+                      "value": "{{element[item.name]}}",
+                      "filterable": true,
+                      "options": "{{elementList}}"
+                    },
+                    "events": {
+                      "onSearch": {
+                        "type": "hook",
+                        "receives": [
+                          "keyword"
+                        ],
+                        "name": "searchElement",
+                        "values": [
+                          "{{keyword}}"
+                        ]
+                      },
+                      "onChange": {
+                        "type": "setField",
+                        "receives": [
+                          "value"
+                        ],
+                        "name": "elementName",
+                        "value": "{{value}}"
+                      }
+                    }
                   }
                 ]
               }
@@ -264,8 +311,8 @@
         },
         "children": [
           {
-            "name":"a",
-            "text":"[[selectAViewOrHtmlElement]]"
+            "name": "a",
+            "text": "[[selectAViewOrHtmlElement]]"
           },
           {
             "name": "TSelect",

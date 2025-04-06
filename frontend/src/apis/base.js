@@ -13,6 +13,11 @@ export const httpGet = async (path, params = {}) => {
   return response.data
 }
 
+export const httpDelete = async (path, params = {}) => {
+  const response = await axios.delete(BASE_URL+path,{params})
+  return response.data
+}
+
 export const requireData = (request) => {
   return new Promise((resolve, reject) => {
     return request.then((res) => {

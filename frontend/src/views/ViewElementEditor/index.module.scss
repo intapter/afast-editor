@@ -31,6 +31,11 @@
       height: fit-content;
       display: flex;
       gap: 10px;
+      align-items: center;
+      >*{
+        
+        flex-shrink: 0;
+      }
       .label{
         text-align: left;
         width: 80px;

@@ -112,6 +112,23 @@ const HTML_ELE_TAGS = new Set([
   'video',
   'wbr',
 ]);
+
+const searchElementParent: (element: PageElement, id: UUID) => PageElement | null = (
+  element,
+  id,
+) => {
+  if (!element) return null;
+  if (!element.children) return null;
+  for (let i = 0; i < element.children.length; i++) {
+    if(element.children[i] && element.children[i].id === id){
+      return element
+    }
+    const e = searchElementParent(element.children[i], id);
+    if (e !== null) return e;
+  }
+  return null;
+};
+
 const searchElement: (element: PageElement, id: UUID) => PageElement | null = (
   element,
   id,
@@ -133,6 +150,36 @@ export class ElementService {
     private readonly projectService: ProjectService,
   ) {}
 
+  delete(projectId: UUID, pageName: UUID, id: UUID) {
+    const pageDetail = this.pageService.detail(projectId, pageName);
+    const parent = searchElementParent(pageDetail.view, id);
+    if(!parent || !parent.children) throw new Error('Unknown element')
+    parent.children = parent.children.filter((c) => {
+      return c.id !== id
+    })
+    this.pageService.update(
+      projectId,
+      pageName,
+      pageDetail,
+    );
+    return parent
+  }
+
+  update(updateElementDto: UpdateElementDto){
+    const pageDetail = this.pageService.detail(
+      updateElementDto.projectId,
+      updateElementDto.pageName,
+    );
+    const element = searchElement(pageDetail.view, updateElementDto.id);
+    (element as any)[updateElementDto.configName] = updateElementDto.value
+    this.pageService.update(
+      updateElementDto.projectId,
+      updateElementDto.pageName,
+      pageDetail,
+    );
+    return element
+  }
+
   list(id: UUID, keyword: string) {
     let list = [...HTML_ELE_TAGS];
     const projectInfo = this.projectService.detail(id);
@@ -147,7 +194,7 @@ export class ElementService {
     return list.sort();
   }
 
-  createElementDto(createElementDto: CreateElementDto): ElementInfo {
+  createElementTo(createElementDto: CreateElementDto): ElementInfo {
     const pageDetail = this.pageService.detail(
       createElementDto.projectId,
       createElementDto.pageName,

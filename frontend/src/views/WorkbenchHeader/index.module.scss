@@ -8,6 +8,11 @@
   background: color.$cardBackgroundColor;
   box-sizing: border-box;
   border-bottom: 1px solid color.$borderColor;
+  .logo{
+    width: 30px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
   .action{
     padding: 2px 10px;
     box-sizing: border-box;
